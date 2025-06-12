@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Mystère Kongoli – Réflexions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: sans-serif; margin: 0; padding: 2rem; background: #f4f4f4; color: #333; }
+    header { text-align: center; margin-bottom: 2rem; }
+    h1 { margin-bottom: 0; }
+    .thought { background: white; padding: 1rem; margin-bottom: 1rem; border-left: 4px solid #111; }
+    time { font-size: 0.9rem; color: #666; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Mystère Kongoli</h1>
+    <p>Réflexions et pensées pour un monde plus humain</p>
+  </header>
+
+  <div id="posts"></div>
+
+  <script>
+    fetch('posts/index.json')
+      .then(response => response.json())
+      .then(data => {
+        const container = document.getElementById('posts');
+        data.posts.forEach(post => {
+          const div = document.createElement('div');
+          div.className = 'thought';
+          div.innerHTML = `<time>${post.date}</time>
+            <p><strong>FR :</strong> ${post.fr}</p>
+            <p><strong>EN :</strong> ${post.en}</p>`;
+          container.appendChild(div);
+        });
+      });
+  </script>
+</body>
+</html>
