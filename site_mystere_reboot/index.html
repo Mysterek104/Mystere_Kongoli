@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Réflexions de Mystère Kongoli</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: sans-serif; background: #f4f4f4; color: #222; padding: 2rem; }
+    h1 { text-align: center; }
+    .thought { background: #fff; margin: 1rem auto; padding: 1rem; border-left: 4px solid #333; max-width: 600px; }
+    time { display: block; font-size: 0.85rem; color: #777; margin-bottom: 0.5rem; }
+  </style>
+</head>
+<body>
+  <h1>Réflexions de Mystère Kongoli</h1>
+  <div id="thoughts"></div>
+  <script>
+    fetch('posts/index.json')
+      .then(r => r.json())
+      .then(data => {
+        const container = document.getElementById('thoughts');
+        data.posts.forEach(post => {
+          const div = document.createElement('div');
+          div.className = 'thought';
+          div.innerHTML = `
+            <time>${post.date}</time>
+            <p><strong>FR :</strong> ${post.fr}</p>
+            <p><strong>EN :</strong> ${post.en}</p>
+          `;
+          container.appendChild(div);
+        });
+      });
+  </script>
+</body>
+</html>
